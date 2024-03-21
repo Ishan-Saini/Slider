@@ -14,8 +14,8 @@
 
 .continuousSlider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 24px;
-  width: 24px;
+  height: var(--size);
+  width: var(--size);
   border-radius: 50%;
   background: #47B647;
   cursor: pointer;
@@ -27,6 +27,8 @@
   position: relative;
 }
 
+.handlerSize
+
 .continuousSlider::-webkit-slider-thumb:hover {
   background: #47B647;
   border: #EDFAED solid 6px;
@@ -35,7 +37,7 @@
 
 .continuousSlider::-webkit-slider-thumb:active {
   border: #ffffff solid 6px;
-  box-shadow: 0px 0px 0px 3px #47B647;
+  box-shadow: 0px 0px 0px 2px #47B647;
 }
 
 .continuousSlider::-moz-range-thumb {

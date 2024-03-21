@@ -14,6 +14,14 @@ export default {
     type: {
       control: 'inline-radio',
       options: ['continuous', 'discrete', 'range']
+    },
+    size: {
+      control: 'inline-radio',
+      options: ['24px', '32px']
+    },
+    status: {
+      control: 'inline-radio',
+      options: ['default', 'hover', 'focus']
     }
   }
 }

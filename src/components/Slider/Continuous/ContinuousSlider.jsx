@@ -5,6 +5,7 @@ import classes from './ContinuousSlider.module.css';
 const ContinuousSlider = ({
   value,
   uom,
+  size,
   onChange,
   getSlidedValueFraction,
   ...props
@@ -25,6 +26,10 @@ const ContinuousSlider = ({
     tooltipRef.current.style.left = `${getSlidedValueFraction(value) * 100}%`;
   }, [value, getSlidedValueFraction])
 
+  const handleProperties = {
+    "--size": size,
+  }
+
   return (
     <>
       <input
@@ -34,6 +39,9 @@ const ContinuousSlider = ({
         value={value}
         onChange={onChange}
         {...props}
+        onMouseOver={() => tooltipRef.current.style.display = 'flex'}
+        onMouseOut={() => tooltipRef.current.style.display = 'none'}
+        style={handleProperties}
       />
       <Tooltip tooltipRef={tooltipRef} text={value} uom={uom} />
     </>

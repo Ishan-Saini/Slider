@@ -5,6 +5,7 @@ import classes from './RangeSlider.module.css'
 const Handle = ({
   value,
   uom,
+  size,
   identifier,
   position,
   getSlidedValue,
@@ -17,6 +18,10 @@ const Handle = ({
     tooltipRef.current.style.left = `${getSlidedValue(value)}%`
   }, [position, getSlidedValue, value])
 
+  const handleProperties = {
+    "--size": size,
+  }
+
   return (
     <>
       <input
@@ -25,6 +30,9 @@ const Handle = ({
         value={value}
         name={identifier}
         {...props}
+        onMouseOver={() => tooltipRef.current.style.display = 'flex'}
+        onMouseOut={() => tooltipRef.current.style.display = 'none'}
+        style={handleProperties}
       />
       <Tooltip tooltipRef={tooltipRef} text={value} uom={uom} />
     </>

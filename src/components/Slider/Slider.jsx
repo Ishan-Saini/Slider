@@ -28,7 +28,7 @@ const Slider = ({
     <div className={classes.container}>
       <div className={classes.valueContainer}>
         {
-          type === 'continuous' &&
+          (type === 'continuous' || type === 'discrete') &&
           <ContinuousSlider
             min={min}
             max={max}

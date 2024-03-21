@@ -45,6 +45,8 @@ const Template = args => {
     }
   }
 
+  if (args.type !== 'discrete') args.step = null;
+
   return (
     <div style={{ width: '480px' }}>
       <Slider {...args} value={value} onChange={handleChange} />
@@ -56,5 +58,6 @@ export const ReactSlider = Template.bind({})
   ReactSlider.args = {
     min: 0,
     max: 100,
-    value: 50
+    value: 50,
+    step: 5
 }

@@ -69,6 +69,8 @@ Slider.defaultProps = {
   onChange: () => {},
   step: 1,
   uom: '%',
+  status: 'default',
+  size: '24px'
 }
 
 Slider.propTypes = {

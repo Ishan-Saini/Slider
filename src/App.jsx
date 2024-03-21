@@ -3,14 +3,17 @@ import './App.css'
 import Slider from './components/Slider/Slider.jsx'
 
 function App() {
-  const [value, setValue] = useState([45,65])
+  const [value, setValue] = useState(50)
   return (
     <div style={{ width: '480px' }} className='center'>
       <Slider
         min={0}
         max={100}
         value={value}
-        onChange={newValue => setValue(newValue)}
+        size='24px'
+        type='continuous'
+        status='default'
+        onChange={e => setValue(e.target.value)}
       />
     </div>
   )

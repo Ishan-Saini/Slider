@@ -11,13 +11,13 @@ export default {
   component: Slider,
   decorators: [alignmentDecorator],
   argTypes: {
-    type: {
-      control: 'inline-radio',
-      options: ['continuous', 'discrete', 'range']
-    },
     size: {
       control: 'inline-radio',
       options: ['24px', '32px']
+    },
+    type: {
+      control: 'inline-radio',
+      options: ['continuous', 'discrete', 'range']
     },
     status: {
       control: 'inline-radio',

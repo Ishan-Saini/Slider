@@ -1,10 +1,68 @@
 .container {
-  width: 100%;
   height: fit-content;
+  width: 100%;
+  padding: 0 16px;
   background-color: inherit;
 }
 
 .valueContainer {
+  height: 24px;
+  padding: 16px 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   position: relative;
+  font-family: inherit;
 }
 
+.valueContainer:focus-within {
+  outline: none;
+}
+
+.valueContainer .label {
+  position: absolute;
+  color: #021d3d;
+  font-size: 12px;
+  bottom: -3px;
+}
+
+.valueContainer .minLabel {
+  left: 5px;
+}
+
+.valueContainer .maxLabel {
+  right: 5px;
+}
+
+.valueContainer .tooltip {
+  position: absolute;
+  z-index: 20;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  border-radius: 4;
+  color: #ffffff;
+  background-color: #3e7afc;
+  font-size: 12px;
+}
+
+.valueContainer .tooltip::before {
+  content: '';
+  position: absolute;
+  background-color: #3e7afc;
+  left: 50%;
+  top: 95%;
+  transform: translateX(-50%);
+  z-index: 20;
+  height: 5px;
+  width: 10px;
+  clip-path: polygon(100% 0, 0 0, 50% 100%);
+}
+
+/* .rangeBar:disabled,
+.rangeBar.disabled {
+  cursor: default;
+  opacity: 0.34;
+} */

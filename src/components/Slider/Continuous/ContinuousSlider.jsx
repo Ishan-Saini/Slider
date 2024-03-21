@@ -6,7 +6,8 @@ const ContinuousSlider = ({
   value,
   uom,
   onChange,
-  getSlidedValueFraction
+  getSlidedValueFraction,
+  ...props
 }) => {
 
   const sliderRef = useRef();
@@ -15,8 +16,8 @@ const ContinuousSlider = ({
   useEffect(() => {
     if(!sliderRef.current) return
     const valuePercentage = getSlidedValueFraction(value) * 100;
-    const gradientBg = null;
-    sliderRef.current.background = gradientBg;
+    const gradientBg = `linear-gradient(90deg, #47B647 ${valuePercentage}%, #F2F3F5 ${valuePercentage}%)`;
+    sliderRef.current.style.background = gradientBg;
   }, [value, getSlidedValueFraction])
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const ContinuousSlider = ({
         className={classes.continuousSlider}
         value={value}
         onChange={onChange}
+        {...props}
       />
       <Tooltip tooltipRef={tooltipRef} text={value} uom={uom} />
     </>

@@ -1,3 +1,11 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
 .container {
   height: fit-content;
   width: 100%;
@@ -38,31 +46,32 @@
 .valueContainer .tooltip {
   position: absolute;
   z-index: 20;
-  bottom: 120%;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  padding: 4px 8px;
-  border-radius: 4;
+  width: 44px;
+  height: 36px;
+  border-radius: 8px;
   color: #ffffff;
-  background-color: #3e7afc;
-  font-size: 12px;
+  background: #0F0F0F;
+  font-size: 13.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  line-height: 20.25px;
 }
 
 .valueContainer .tooltip::before {
   content: '';
   position: absolute;
-  background-color: #3e7afc;
+  background: #0F0F0F;
   left: 50%;
   top: 95%;
   transform: translateX(-50%);
   z-index: 20;
-  height: 5px;
-  width: 10px;
+  height: 8px;
+  width: 14px;
   clip-path: polygon(100% 0, 0 0, 50% 100%);
 }
-
-/* .rangeBar:disabled,
-.rangeBar.disabled {
-  cursor: default;
-  opacity: 0.34;
-} */

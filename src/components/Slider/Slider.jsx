@@ -70,7 +70,6 @@ Slider.propTypes = {
   max: propTypes.number,
   value: propTypes.oneOfType([
     propTypes.number,
-    propTypes.string,
     propTypes.arrayOf(propTypes.number),
   ]),
   onChange: propTypes.func,

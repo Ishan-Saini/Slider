@@ -40,6 +40,8 @@
 }
 
 .handle::-webkit-slider-thumb:active {
+  border: #ffffff solid 6px;
+  box-shadow: 0px 0px 0px 3px #47B647;
 }
 
 .handle::-moz-range-thumb {

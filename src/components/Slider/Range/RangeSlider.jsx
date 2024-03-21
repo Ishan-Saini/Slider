@@ -2,7 +2,7 @@ import { useRef, useCallback, useState, useEffect } from "react";
 import Handle from "./Handle";
 import classes from './RangeSlider.module.css';
 
-const thumbsMap = {
+const handleRangeMap = {
   0: 0,
   1: 1,
 }
@@ -28,20 +28,20 @@ const RangeSlider = ({
     [values, getSlidedValueFraction],
   )
 
-  const [handleThumbsMap, setHandleThumbsMap] = useState(handleDefaultValues())
-  const [activeThumb, setActiveThumb] = useState(thumbsMap[0])
+  const [handleMap, setHandleMap] = useState(handleDefaultValues())
+  const [activeHandle, setActiveHandle] = useState(handleRangeMap[0])
 
   useEffect(() => {
-    if (!handleThumbsMap) return
+    if (!handleMap) return
     const currentValues = [
-      handleThumbsMap[thumbsMap[0]].value,
-      handleThumbsMap[thumbsMap[1]].value,
+      handleMap[handleRangeMap[0]].value,
+      handleMap[handleRangeMap[1]].value,
     ]
     if ((currentValues[0] != values[0]) || (currentValues[1] != values[1])) {
       const [lowerValue, upperValue] = values
-      setHandleThumbsMap(prevValues =>
+      setHandleMap(prevValues =>
         prevValues.map(({ identifier, value, position }) => {
-          const newValue = identifier === thumbsMap[0] ? lowerValue : upperValue
+          const newValue = identifier === handleRangeMap[0] ? lowerValue : upperValue
           if (value === newValue) {
             return { identifier, value, position }
           }
@@ -53,45 +53,45 @@ const RangeSlider = ({
         }),
       )
     }
-  }, [values, handleThumbsMap, getSlidedValueFraction, handleDefaultValues])
+  }, [values, handleMap, getSlidedValueFraction, handleDefaultValues])
 
   useEffect(() => {
     if (!barRef.current) return
-    const lowerPos = handleThumbsMap[thumbsMap[0]].position
-    const upperPos = handleThumbsMap[thumbsMap[1]].position
+    const lowerPos = handleMap[handleRangeMap[0]].position
+    const upperPos = handleMap[handleRangeMap[1]].position
 
     const bg = `linear-gradient(90deg, #F2F3F5 0,
       #F2F3F5 ${lowerPos}%, #47B647 ${lowerPos}%,
       #47B647 ${upperPos}%, #F2F3F5 ${upperPos}%,
       #F2F3F5 100%)`
     barRef.current.style.background = bg
-  }, [handleThumbsMap, getSlidedValueFraction])
+  }, [handleMap, getSlidedValueFraction])
 
   const updateValue = (keyIndex, value, pos) => {
     if (value < min || value > max) return
-    let currentThumbsMap = [...handleThumbsMap]
-    currentThumbsMap[keyIndex] = {
-      ...currentThumbsMap[keyIndex],
+    let currentHandleRangeMap = [...handleMap]
+    currentHandleRangeMap[keyIndex] = {
+      ...currentHandleRangeMap[keyIndex],
       value,
       position: pos ?? getSlidedValueFraction(value) * 100,
     }
 
     if (
-      currentThumbsMap[thumbsMap[0]].value >
-      currentThumbsMap[thumbsMap[1]].value
+      currentHandleRangeMap[handleRangeMap[0]].value >
+      currentHandleRangeMap[handleRangeMap[1]].value
     ) {
-      const temp = thumbsMap[0]
-      thumbsMap[0] = thumbsMap[1]
-      thumbsMap[1] = temp
+      const temp = handleRangeMap[0]
+      handleRangeMap[0] = handleRangeMap[1]
+      handleRangeMap[1] = temp
     }
 
-    setHandleThumbsMap(currentThumbsMap)
-    onChange(currentThumbsMap.map(({ value }) => value).sort((a, b) => a - b))
+    setHandleMap(currentHandleRangeMap)
+    onChange(currentHandleRangeMap.map(({ value }) => value).sort((a, b) => a - b))
   }
 
   const handleChange = ({ target }) => {
     const { name: keyIndex, value } = target
-    setActiveThumb(keyIndex)
+    setActiveHandle(keyIndex)
     const currentValue = Number(value)
     updateValue(keyIndex, currentValue)
   }
@@ -99,22 +99,22 @@ const RangeSlider = ({
   const handleBarClick = e => {
     const mouseX = Number(e.nativeEvent.offsetX)
     const currentPos = (mouseX / e.target.clientWidth) * 100
-    const distanceFromLowerThumb = Math.abs(
-      handleThumbsMap[thumbsMap[0]].position - currentPos,
+    const distLowerHandle = Math.abs(
+      handleMap[handleRangeMap[0]].position - currentPos,
     )
-    const distanceFromUpperThumb = Math.abs(
-      handleThumbsMap[thumbsMap[1]].position - currentPos,
+    const distUpperHandle = Math.abs(
+      handleMap[handleRangeMap[1]].position - currentPos,
     )
 
     const curVal = Number(getSlidedValue(currentPos))
 
-    if (distanceFromLowerThumb <= distanceFromUpperThumb) {
-      setActiveThumb(thumbsMap[0])
-      const { keyName } = handleThumbsMap[thumbsMap[0]]
+    if (distLowerHandle <= distUpperHandle) {
+      setActiveHandle(handleRangeMap[0])
+      const { keyName } = handleMap[handleRangeMap[0]]
       updateValue(keyName, curVal, currentPos)
     } else {
-      setActiveThumb(thumbsMap[1])
-      const { keyName } = handleThumbsMap[thumbsMap[1]]
+      setActiveHandle(handleRangeMap[1])
+      const { keyName } = handleMap[handleRangeMap[1]]
       updateValue(keyName, curVal, currentPos)
     }
   }
@@ -126,9 +126,9 @@ const RangeSlider = ({
         ref={barRef}
         onClick={handleBarClick}
       />
-      {handleThumbsMap.map(handleProps => (
+      {handleMap.map(handleProps => (
         <Handle
-          identifier={handleProps.identifier}
+          key={handleProps.identifier}
           {...handleProps}
           {...props}
           step={step}

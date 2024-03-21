@@ -15,7 +15,7 @@ const Slider = ({
 }) => {
   const isRangeSlider = Array.isArray(value);
   const getSlidedValueFraction = useCallback(
-    val => (val - min) / (max - min),
+    val => (Number(val) - min) / (max - min),
     [min, max]
   )
 

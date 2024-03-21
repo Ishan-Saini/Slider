@@ -12,7 +12,7 @@ const Slider = ({
   step,
   onChange,
   type,
-  size,
+  size = '24px',
   status,
 }) => {
   const isRangeSlider = Array.isArray(value);

@@ -11,7 +11,7 @@ const Slider = ({
   max,
   step,
   onChange,
-
+  type,
 }) => {
   const isRangeSlider = Array.isArray(value);
   const getSlidedValueFraction = useCallback(
@@ -28,7 +28,7 @@ const Slider = ({
     <div className={classes.container}>
       <div className={classes.valueContainer}>
         {
-          !isRangeSlider &&
+          type === 'continuous' &&
           <ContinuousSlider
             min={min}
             max={max}
@@ -40,7 +40,7 @@ const Slider = ({
           />
         }
         {
-          isRangeSlider &&
+          type === 'range' &&
           <RangeSlider
             min={min}
             max={max}

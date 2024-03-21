@@ -7,53 +7,54 @@ const alignmentDecorator = story => (
 )
 
 export default {
-  title: 'Components/Slider',
+  title: 'Components',
   component: Slider,
   decorators: [alignmentDecorator],
+  argTypes: {
+    type: {
+      control: 'inline-radio',
+      options: ['continuous', 'discrete', 'range']
+    }
+  }
 }
 
-export const Continuous = () => {
-  const [value, setValue] = useState(50)
+const Template = args => {
+  const [value, setValue] = useState(args.value);
+  const [type, setType] = useState('continuous')
+
+  const handleChange = el => {
+    if (args.type === 'range') {
+      setValue(el)
+    }
+    else {
+      setValue(el.target.value);
+      if (args.onChange) {
+        args.onChange(el);
+      }
+    }
+  };
+  
+  if(args.type != type)
+  {
+    setType(args.type)
+    if (args.type !== 'range') {
+      setValue(50);
+    }
+    else {
+      setValue([30,70]);
+    }
+  }
 
   return (
     <div style={{ width: '480px' }}>
-      <Slider
-        min={0}
-        max={100}
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
+      <Slider {...args} value={value} onChange={handleChange} />
     </div>
-  )
-}
+  );
+};
 
-export const Discrete = () => {
-  const [value, setValue] = useState(50)
-
-  return (
-    <div style={{ width: '480px' }}>
-      <Slider
-        min={0}
-        max={100}
-        step={5}
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
-    </div>
-  )
-}
-
-export const Range = () => {
-  const [value, setValue] = useState([40, 65])
-
-  return (
-    <div style={{ width: '480px' }}>
-      <Slider
-        min={0}
-        max={100}
-        value={value}
-        onChange={newValue => setValue(newValue)}
-      />
-    </div>
-  )
+export const ReactSlider = Template.bind({})
+  ReactSlider.args = {
+    min: 0,
+    max: 100,
+    value: 50
 }

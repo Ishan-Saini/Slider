@@ -6,6 +6,7 @@ const Handle = ({
   value,
   uom,
   size,
+  status,
   identifier,
   position,
   getSlidedValue,
@@ -20,6 +21,8 @@ const Handle = ({
 
   const handleProperties = {
     "--size": size,
+    "--box-shadow": status === "focus" ? "0px 0px 0px 2px #47B647" : "0px 1px 4px 0px #0000003D",
+    "--border": status === "hover" ? "#EDFAED solid 6px" : "#ffffff solid 6px"
   }
 
   return (

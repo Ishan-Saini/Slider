@@ -12,6 +12,7 @@ const RangeSlider = ({
   max,
   step,
   size,
+  status,
   values,
   onChange,
   getSlidedValueFraction,
@@ -138,6 +139,7 @@ const RangeSlider = ({
           min={min}
           max={max}
           size={size}
+          status={status}
         />
       ))}
     </>

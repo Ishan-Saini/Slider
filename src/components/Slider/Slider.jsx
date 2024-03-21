@@ -12,7 +12,8 @@ const Slider = ({
   step,
   onChange,
   type,
-  size
+  size,
+  status,
 }) => {
   const isRangeSlider = Array.isArray(value);
   const getSlidedValueFraction = useCallback(
@@ -36,6 +37,7 @@ const Slider = ({
             value={value}
             uom={uom}
             size={size}
+            status={status}
             step={step}
             onChange={onChange}
             getSlidedValueFraction={getSlidedValueFraction}
@@ -49,6 +51,7 @@ const Slider = ({
             values={value}
             uom={uom}
             size={size}
+            status={status}
             step={step}
             onChange={onChange}
             getSlidedValueFraction={getSlidedValueFraction}

@@ -6,6 +6,7 @@ const ContinuousSlider = ({
   value,
   uom,
   size,
+  status,
   onChange,
   getSlidedValueFraction,
   ...props
@@ -28,6 +29,8 @@ const ContinuousSlider = ({
 
   const handleProperties = {
     "--size": size,
+    "--box-shadow": status === "focus" ? "0px 0px 0px 2px #47B647" : "0px 1px 4px 0px #0000003D",
+    "--border": status === "hover" ? "#EDFAED solid 6px" : "#ffffff solid 6px"
   }
 
   return (
